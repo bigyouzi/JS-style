@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 150px;
+            height: 180px;
+            border: 1px solid #000;
+            margin: 100px auto;
+            background-color: orange;
+        }
+        p{
+            margin-top: 10px;
+            /* margin-left: 5px; */
+            font-size: 14px;
+            line-height: 60px;
+            display: block;
+            text-align: center;
+        }
+        span{
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            display: block;
+            margin: 0 auto;
+            font-size: 30px;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <!-- <p>2019年</p>
+        <span>27</span> -->
+        <p></p>
+        <span></span>
+    </div>
+</body>
+</html>
+<script>
+    var box = document.getElementById("box");
+    var childs = box.children;
+    var arr = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+
+    var date = new Date();
+    childs[0].innerHTML = date.getFullYear()+ "年" + date.getMonth() + "月" + date.getDate() + "日" + " " + arr[date.getDay()];
+    childs[1].innerHTML = date.getDate();
+</script>

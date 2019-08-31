@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            top: 50px;
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">开始</button>
+    <div class="box" id="box"></div>
+</body>
+</html>
+<script>
+    function $(id){return document.getElementById(id)}
+    var leader = 0;
+    var target = 200;
+    var timer = null;
+    $("btn").onclick = function(){       
+        timer = setInterval(function(){
+            leader = leader + (target - leader )/10;
+            box.style.left = leader + "px";
+        },30)
+    } 
+</script>

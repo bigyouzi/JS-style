@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            margin: 200px;
+        }
+        #left{
+            width: 208px;
+            height: 40px;
+            background: url(images/left.jpg) no-repeat;
+            float: left;
+            color: #ccc;
+            padding-left: 8px;
+            outline-style: none;
+        }
+        #right{
+            width: 40px;
+            height: 40px;
+            background: url(images/right.jpg) no-repeat;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <input type="text" value="请输入..." id="left">
+        <!-- <div id="left"></div> -->
+        <div id="right"></div>
+    </div>
+</body>
+</html>
+<script>
+    var txt = document.getElementById("left");
+    txt.onfocus = function(){
+        // alert("dedao")
+        if(txt.value == "请输入...")
+        {
+            // alert(1)
+            txt.value = " ";
+            txt.style.color = "#333";
+        }
+    }
+    txt.onblur = function(){
+        if(txt.value ==" ")
+        {
+            txt.value = "请输入...";
+            txt.style.color="#ccc";
+        }
+    }
+</script>

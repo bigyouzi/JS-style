@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box2{
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            margin: 10px auto 10px 0;
+            position: absolute;
+        }
+        #box4{
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: skyblue;
+            margin: 120px auto auto 0;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn200">200</button>
+    <button id="btn400">400</button>
+    <div id="box2"></div>
+    <div id="box4"></div>
+</body>
+</html>
+<script>
+    function $(id){return document.getElementById(id)}
+    $("btn200").onclick = function(){
+        animate(box2,200)
+    }
+    $("btn400").onclick = function(){
+        animate($("box4"),400)
+    }
+    function animate(obj,target){
+        clearInterval(obj.timer);
+        var speed = obj.offsetLeft < target ? 5 : -5;
+        obj.timer = setInterval(function() {
+            var result = target - obj.offsetLeft;  
+            obj.style.left = obj.offsetLeft + speed + "px";
+            if(Math.abs(result)<=5)  
+            {
+                clearInterval(obj.timer);
+                obj.style.left = target + "px";  
+            }
+        },30)
+    }
+</script>

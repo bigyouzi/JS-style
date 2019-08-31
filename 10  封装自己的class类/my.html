@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    window.onload = function(){
+       //封装自己class类名
+        function getClass(classname){
+            //如果浏览器支持，则直接返回
+            if(document.getElementsByClassName)
+            {
+                return document.getElementsByClassName(classname);
+            }
+            // 不支持的 浏览器
+            var arr = []; // 用于存放满足的数组
+            var dom = document.getElementsByTagName("*");
+            //alert(dom.length);
+            for(var i=0;i<dom.length;i++)
+            {
+                if(dom[i].className == classname)
+                {
+                    arr.push(dom[i]);
+                }
+            }
+            return arr;
+        }
+        
+        console.log(getClass("demo").length);
+    }
+</script>

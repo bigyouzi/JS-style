@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .clock{
+            width: 600px;
+            height: 600px;
+            margin: 10px auto;
+            background: url(images/clock.jpg);
+            position: relative;
+        }
+        .h,.m,.s{
+            width: 30px;
+            height: 600px;
+            position: absolute;
+            left: 50%;
+            margin-left: -15px;
+        }
+        .h{
+            background: url(images/hour.png) no-repeat;
+        }
+        .m{ 
+            background: url(images/minute.png) no-repeat; 
+        }
+        .s{ 
+            background: url(images/second.png) no-repeat; 
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="h" id="hour"></div>
+        <div class="m" id="minute"></div>
+        <div class="s" id="second"></div>
+    </div>
+</body>
+</html>
+<script>
+    var hour = document.getElementById("hour");
+    var minute = document.getElementById("minute");
+    var second = document.getElementById("second");
+
+    var ms=0,s=0,m=0,h=0;
+    setInterval(function(){
+        var date = new Date();
+        ms = date.getMilliseconds();
+        s =  date.getSeconds();
+        m = date.getMinutes();
+        h = date.getHours();
+
+        second.style.WebkitTransform = "rotate("+ s*6 +"deg)";
+        minute.style.WebkitTransform = "rotate("+ m*6 +"deg)";
+        hour.style.WebkitTransform = "rotate("+ h*30 +"deg)";
+        second.style.MozTransform = "rotate("+ s*6 +"deg)";
+        minute.style.MozTransform = "rotate("+ m*6 +"deg)";
+        hour.style.MozTransform = "rotate("+ h*30 +"deg)";
+    },1000);
+</script>

@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+*{ padding:0; margin:0; list-style:none; border:0;}
+.all{
+  width:500px;
+  height:200px;
+  padding:7px;
+  border:1px solid #ccc;
+  margin:100px auto;
+  position:relative;
+}
+.screen{
+    width:500px;
+    height:200px;
+     overflow:hidden; 
+    position:relative;
+}
+.screen li{ width:500px; height:200px; overflow:hidden; float:left;}
+.screen ul{ position:absolute; left:0; top:0px; width:3000px;}
+.all ol{ position:absolute; right:10px; bottom:10px; line-height:20px; text-align:center;}
+.all ol li{ float:left; width:20px; height:20px; background:#fff; border:1px solid #ccc; margin-left:10px; cursor:pointer;}
+.all ol li.current{ background:yellow;}
+
+</style>
+ 
+</head>
+
+<body>
+<div class="all" id='all'>
+    <div class="screen">
+        <ul id="ul">
+            <li><img src="images/taobao/1.jpg" width="500" height="200" /></li>
+            <li><img src="images/taobao/2.jpg" width="500" height="200" /></li>
+            <li><img src="images/taobao/3.jpg" width="500" height="200" /></li>
+            <li><img src="images/taobao/4.jpg" width="500" height="200" /></li>
+            <li><img src="images/taobao/5.jpg" width="500" height="200" /></li>
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>
+<script>
+  function animate(obj,target){
+    clearInterval(obj.timer);
+    var speed = obj.offsetLeft < target ? 15 : -15;
+    obj.timer = setInterval(function(){
+      var result = target - obj.offsetLeft;
+      obj.style.left = obj.offsetLeft + speed + "px";
+      if(Math.abs(result)<=15)
+      {
+        clearInterval(obj.timer);
+        obj.style.left = target + "px";
+      }
+    },5)
+  }
+
+  var box = document.getElementById("all");
+  var ul = document.getElementById("ul");
+  var ulLis = ul.children;
+
+  // 因为我们要做无缝滚动  ，所以要克隆第一张，放到最后一张后面去
+  ul.appendChild(ul.children[0].cloneNode(true));
+  // console.log(ulLis.length)
+  var ol = document.createElement("ol");
+  box.appendChild(ol);
+  for(var i=0;i<ulLis.length-1;i++)
+  {
+    var li = document.createElement("li");
+    li.innerHTML = i+1;
+    ol.appendChild(li);
+  }
+  ol.children[0].className = "current";
+
+  //点击轮播
+  var olLis = ol.children;
+  for(var i=0;i<olLis.length;i++)
+  {
+    olLis[i].index = i;
+    olLis[i].onclick=function(){
+      for(var j=0;j<olLis.length;j++)
+      {
+        olLis[j].className = "";
+      }
+      this.className = "current";
+      animate(ul,-this.index*500)
+      // square = key = this.index;
+    }
+  }
+
+  //自动轮播
+  var timer = null;
+  var key = 0;//控制播放张数
+  var square = 0;//控制小方块
+  timer = setInterval(autoPlay,1000);
+  function autoPlay(){
+    key++;
+    if(key>ulLis.length-1)
+    {
+      ul.style.left = 0;
+      key =1;
+    }
+    animate(ul,-key*500);
+
+    square++;
+    if(square > olLis.length-1)
+    {
+      square = 0;
+    }
+    for(var i=0;i<olLis.length;i++)
+    {
+      olLis[i].className = "";
+    }
+    olLis[square].className = "current";
+  }
+
+  box.onmouseover = function(){
+    clearInterval(timer);
+  }
+  box.onmouseout = function(){
+    timer = setInterval(autoPlay,1000);
+  }
+</script>

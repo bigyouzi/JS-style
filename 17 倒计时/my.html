@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            font-size:30px;
+            text-align: center;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="demo"></div>
+</body>
+</html>
+<script>
+    var demo = document.getElementById("demo");
+
+    var endTime = new Date("2019/11/11 00:00:00");
+    setInterval(clock,1000);
+    function clock(){
+        var nowTime = new Date();
+        var seconds = parseInt((endTime - nowTime)/1000);
+        var day = parseInt(seconds/3600/24);
+        // console.log(day);
+        var hour = parseInt(seconds/3600%24);
+        var minute = parseInt(seconds/60%60);
+        var second = parseInt(seconds%60);
+
+        day < 10 ? day = "0"+day : day;
+        hour < 10 ? hour = "0"+hour : hour;
+        minute < 10 ? minute = "0" +minute : minute;
+        second < 10 ? second = "0" + second : second;
+
+        demo.innerHTML = "还剩下" + day +"天" + hour +"时" + minute + "分" + second + "秒";
+    }
+</script>

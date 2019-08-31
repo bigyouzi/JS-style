@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 350px;
+            height: 300px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+        }
+        .dt{
+            font-size: 15px;
+            line-height: 35px;
+            padding-left: 10px;
+        }
+        .icon{
+            width: 50px;
+            height: 50px;
+            background: url(images/icon.png) no-repeat;
+            background-size: 150px 150px;
+            margin-right: 10px; 
+            float: left;
+        }
+        select{
+            width: 100px;
+        }
+        .dd{
+            padding: 10px;
+        }
+        .dd-t{
+            overflow: hidden;
+        }
+        .dd-b{
+            /* padding: 10px; */
+        }
+        .yunshi{
+            width: 80px;
+            height: 20px;
+            background: url(images/yunshi.png) no-repeat;
+            background-size: 80px 40px;
+            display: inline-block;
+            position: relative;
+        }
+        .star{
+            width: 60px;
+            height: 20px;
+            background: url(images/yunshi.png) no-repeat left bottom;
+            background-size: 80px 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="dt">星座运势</div>
+        <div class="dd">
+            <div class="dd-t">
+                <div class="icon" id="ico"></div>
+                <div class="right">
+                    <select name="" id="sele">
+                        <option value="0">金牛座</option>
+                        <option value="1">巨蟹座</option>
+                        <option value="2">天秤座</option>
+                    </select><br>
+                    <div>
+                        今日运势: 
+                        <span class="yunshi">
+                            <span class="star" id="xing"></span>        
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="dd-b" id="txt">这几天的财运都很强，但是危机总在不知不觉之中发生了，例如：因为太过乐观而误判情势，导致投…[详细]</div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var sele = document.getElementById("sele");
+    function $(id){return document.getElementById(id);}
+    var arr=[10,4,8];//存放运势星数
+    var t_arr=["aaa","bbb","ccc"];//存放汉子
+    
+    sele.onchange = function(){
+        // alert(this.value);
+        $("ico").style.backgroundPosition ="0 "+(-this.value*50)+"px";
+        $("txt").innerHTML = t_arr[this.value];
+        $("xing").style.width = arr[this.value]*8 +"px";
+    }
+    
+
+</script>

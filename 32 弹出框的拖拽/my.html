@@ -1,0 +1,110 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <title>Document</title>
+     <style>
+         *{
+            margin: 0;
+            padding: 0;
+         }
+         .nav{
+            width: 100%;
+            height: 35px;
+            background-color: orange;
+            line-height: 35px;
+         }
+         .nav a{
+            text-decoration: none;
+            color: #000;
+            margin-left: 20px;
+         }
+         .d-box{
+            width: 400px;
+            height: 300px;
+            /* margin: 100px auto; */
+            left: 50%;
+            margin-left: -200px;
+            top: 50%;
+            margin-top: -150px;
+            border: 10px solid #ccc;
+            display: none;
+            position: absolute;
+         }
+         .d-box .hd{
+            width: 100%;
+            height: 25px;
+            background-color: pink;
+            display: block;
+            cursor: move;
+         }
+         .d-box .hd span{
+            float: right;
+            cursor: pointer;
+         }
+     </style>
+ </head>
+ <body>
+     <div class="nav">
+         <a href="javascript:;" id="register">注册信息</a>
+     </div>
+     <div class="d-box" id="b_box">
+         <div class="hd" id=drop>
+             注册信息(可以拖拽)<span id="box_close">【关闭】</span>
+         </div>
+         <div class="bd"></div>
+     </div>
+ </body>
+ </html>
+ <script>
+     var register = document.getElementById("register");
+     var b_box = document.getElementById("b_box");
+     var drop = document.getElementById("drop");
+     var close = document.getElementById("box_close");
+
+     register.onclick = function(){
+        b_box.style.display = "block";
+     }
+     close.onclick = function(){
+        b_box.style.display = "none";
+     }
+
+     dropbox(drop,b_box);
+     function dropbox(current,move){
+        current.onmousedown = function(event){
+            var event = event || window.event;
+            var x = event.clientX - move.offsetLeft - 200;
+            var y = event.clientY - move.offsetTop - 150;
+
+            document.onmousemove = function(event){
+                var event = event || window.event;
+                move.style.left = event.clientX - x + "px";
+                move.style.top = event.clientY - y + "px";
+                 window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+            }
+        }
+        document.onmouseup = function() {   
+            document.onmousemove = null;
+        }
+     }
+
+        // startDrop(drop,b_box);  // 鼠标放到  drop    但是移动 是 box
+    function startDrop(current,move) {
+        current.onmousedown = function(event) {
+            var event = event || window.event;
+            var x = event.clientX - move.offsetLeft - 200;   // 记录当前盒子的x 位置
+            var y = event.clientY - move.offsetTop - 150;  //  // 记录当前盒子的y位置
+            document.onmousemove = function(event) {
+                var event = event || window.event;
+                move.style.left = event.clientX - x + "px";
+                move.style.top = event.clientY - y + "px";
+                window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+            }
+
+        }
+        document.onmouseup = function() {  // 鼠标弹起之后， 鼠标继续移动不应该操作
+            document.onmousemove = null;
+        }
+    }
+
+ </script>
